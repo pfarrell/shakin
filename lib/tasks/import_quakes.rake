@@ -3,10 +3,9 @@ require 'dm-migrations'
 require 'open-uri'
 require 'csv'
 require 'quake_feed'
-require 'byebug'
 
-task :import do
-  DataMapper::Logger.new(STDOUT, :debug)
+task :import, :debug do |t,args|
+  DataMapper::Logger.new(STDOUT, :debug) if args.debug == "debug"
   DataMapper.setup(:default, ENV["POSTGRES_URI"] || 'postgres://localhost/quakes')
   DataMapper.auto_upgrade!
   DataMapper.finalize
@@ -30,4 +29,6 @@ task :import do
       quake.save
     end
   end
+
+  puts "#{Quake.count} quakes!!!"
 end
