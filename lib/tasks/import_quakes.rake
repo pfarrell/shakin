@@ -6,7 +6,7 @@ require 'quake_feed'
 
 task :import, :debug do |t,args|
   DataMapper::Logger.new(STDOUT, :debug) if args.debug == "debug"
-  DataMapper.setup(:default, ENV["POSTGRES_URI"] || 'postgres://localhost/quakes')
+  DataMapper.setup(:default, ENV["DATABASE_URL"] || 'postgres://localhost/quakes')
   DataMapper.auto_upgrade!
   DataMapper.finalize
 
