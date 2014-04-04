@@ -1,3 +1,5 @@
 require './shakin'
 
-run Sinatra::Application
+use Rack::Deflater
+
+run Shakin
