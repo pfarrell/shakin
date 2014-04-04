@@ -1,0 +1,37 @@
+.row
+  .span6.header
+    %a{:href=>"/#{params[:version]}/#{params[:resource]}"}
+      %h2
+        EarthQuakes!!
+    %h4
+      = locals[:desc]
+  .span3
+    %p
+      %table
+        %tr
+          %td.key
+            Returned Records:
+          %td.value
+            =locals[:data].size
+//          %tr
+//            %td{:colspan=>2, :align=>"center"}
+//              Route Filters Used
+//          -locals[:data].params.each do |param|
+//            %tr
+//              %td.key{:align=>"center"}
+//                =param.name
+//              %td
+//                =param.value
+.row
+  .span12{:style=>'overflow : auto'}
+    %table.recordset.sortable
+      %thead
+        %tr
+          -locals[:data][0].attributes.each do |prop, val|
+            %th
+              #{prop}
+      - locals[:data].each do |d|
+        %tr
+          -locals[:data][0].attributes.each do |prop, val|
+            %td
+              #{d[prop]}

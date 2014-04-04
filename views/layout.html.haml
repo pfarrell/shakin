@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+%html
+  %head
+    %title 
+      RealGravity - Otis
+    %meta{charset: "utf-8"}
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
+    %script{src:"#{url_for "/js/masonry.min.js"}"}
+    %script{src:"#{url_for "/js/sorttable.js"}"}
+    %link{href:"#{url_for "/css/bootstrap.css"}", rel:"stylesheet"}
+    %link{href:"#{url_for "/css/bootstrap-responsive.css"}", rel:"stylesheet"}
+    %link{href:"#{url_for "/css/gui.css"}", rel:"stylesheet", title:"timeframe", charset:"utf-8", type:"text/css"}
+    %link{href:"#{url_for "/css/default.css"}", rel:"stylesheet"}
+    %style
+      body { padding-top:60px; }
+  %body
+    .navbar.navbar-inverse.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.navbar-brand{href:"#{url_for '/'}"}
+            Quakes!!
+    .container
+      =yield
+    .container#footer
+
