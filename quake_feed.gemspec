@@ -22,6 +22,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dm-postgres-adapter"
   spec.add_dependency "sinatra"
   spec.add_dependency "sinatra-respond_to"
+  spec.add_dependency "haml"
+  spec.add_dependency "emk-sinatra-url-for"
+  spec.add_dependency "activesupport"
+  spec.add_dependency "dm-geokit"
 
   spec.add_development_dependency "bundler", "~> 1.5"
   spec.add_development_dependency "rake"
