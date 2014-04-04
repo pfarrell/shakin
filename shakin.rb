@@ -37,7 +37,7 @@ class Shakin < Sinatra::Base
     end
 
     if(params["near"])
-      quakes = quakes.all(:
+      quakes = quakes.all
     end
       
     return quakes
