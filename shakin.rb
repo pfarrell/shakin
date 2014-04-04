@@ -6,7 +6,6 @@ require 'quake_feed'
 require 'haml'
 require 'json'
 require 'sinatra/url_for'
-require 'byebug'
 require 'active_support/all'
 
 class Shakin < Sinatra::Base
