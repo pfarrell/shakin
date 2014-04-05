@@ -7,7 +7,6 @@ require 'haml'
 require 'json'
 require 'sinatra/url_for'
 require 'active_support/all'
-require 'byebug'
 
 class Shakin < Sinatra::Base
   register Sinatra::RespondTo
@@ -37,7 +36,6 @@ class Shakin < Sinatra::Base
     end
 
     if(params["near"])
-      byebug
       nearby_quakes = []
       lat, long = params["near"].split(",").map {|s| s.to_f}
       test_loc = Location.new(latitude: lat, longitude: long)
