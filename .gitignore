@@ -3,6 +3,7 @@
 .bundle
 .config
 .yardoc
+.rspec
 InstalledFiles
 _yardoc
 coverage
