@@ -7,6 +7,7 @@ require 'haml'
 require 'json'
 require 'sinatra/url_for'
 require 'active_support/all'
+require 'byebug'
 
 class Shakin < Sinatra::Base
   register Sinatra::RespondTo
@@ -36,7 +37,16 @@ class Shakin < Sinatra::Base
     end
 
     if(params["near"])
-      quakes = quakes.all
+      byebug
+      nearby_quakes = []
+      lat, long = params["near"].split(",").map {|s| s.to_f}
+      test_loc = Location.new(latitude: lat, longitude: long)
+      quakes.each do |quake|
+        quake_loc = Location.new(latitude: quake.latitude, longitude: quake.longitude)
+        dist = Haversine.distance(Haversine::EARTH_RADIUS_MILES, test_loc, quake_loc) 
+        nearby_quakes << quake if dist <= 5.0
+      end
+      quakes = nearby_quakes
     end
       
     return quakes
