@@ -30,8 +30,9 @@
           -locals[:data][0].attributes.each do |prop, val|
             %th
               #{prop}
-      - locals[:data].each do |d|
-        %tr
-          -locals[:data][0].attributes.each do |prop, val|
-            %td
-              #{d[prop]}
+      %tbody
+        - locals[:data].each do |d|
+          %tr
+            -locals[:data][0].attributes.each do |prop, val|
+              %td.filterable-cell
+                #{d[prop]}
