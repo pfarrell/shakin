@@ -1,0 +1,64 @@
+.row
+  .col-6
+    .row
+      .col-6
+        %h1
+          =route_info["source"]
+    .row
+      .col-6
+        %p
+          =route[:description]
+      .col-6
+        .btn-grp
+          %a{:href=>"/v1/describe/#{route_info["route"]}.json"}
+            %button{:class=>'btn btn-small btn-inverse'}
+              as JSON
+.row
+  .col-12
+    %h2
+      URL
+    %h3
+      %a{:href=>"/v1/#{route_info["route"]}"}
+        \/#{route_info["route"]}
+.row
+  .col-12
+    %h2
+      Parameters
+    %table{class: "table table-hover table-bordered"}
+      %tr 
+        %th
+          Name
+        %th
+          Description
+        %th
+          Required
+        %th
+          Data Type
+      -route[:parameters].each do |k,param|
+        -next if param.class != Parameter
+        %tr
+          %td
+            =param.name
+          %td
+            =param.description
+          %td
+            =param.required
+          %td
+            =param.data_type
+    %h2
+      Returns 
+    %table{class: "table table-hover table-bordered"}
+      %th
+        Name
+      %th
+        Type
+      %th
+        Description
+      -route[:properties].each do |c|
+        %tr
+          %td
+            =c.name
+          %td
+            =c.data_type
+          %td
+            =c.description
