@@ -10,7 +10,6 @@ require 'active_support/all'
 
 class Shakin < Sinatra::Base
   register Sinatra::RespondTo
-
   helpers Sinatra::UrlForHelper
 
   #DataMapper::Logger.new(STDOUT, :debug) 
@@ -39,22 +38,29 @@ class Shakin < Sinatra::Base
       nearby_quakes = []
       lat, long = params["near"].split(",").map {|s| s.to_f}
       test_loc = Location.new(latitude: lat, longitude: long)
-      quakes.each do |quake|
+      quakes = quakes.select do |quake|
         quake_loc = Location.new(latitude: quake.latitude, longitude: quake.longitude)
         dist = Haversine.distance(Haversine::EARTH_RADIUS_MILES, test_loc, quake_loc) 
         nearby_quakes << quake if dist <= 5.0
       end
-      quakes = nearby_quakes
     end
-      
     return quakes
-  end
+  end    
 
   get "/" do
     haml :index
   end
 
-  get "/earthquakes" do
+  get "/describe/v1/earthquakes" do
+    description = Quake.describe
+    respond_to do |wants|
+      wants.json { RecordSet.new(data: description).to_json }
+      wants.html { haml :quakes, locals: {data: description, desc: "List of all recent earthquakes"}}
+    end
+  end
+
+
+  get "/v1/earthquakes" do
     quakes = get_quakes(params)
     respond_to do |wants|
       wants.json { RecordSet.new(data: quakes).to_json }
