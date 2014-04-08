@@ -10,9 +10,23 @@
     %a{href:'mailto:pfarrell@realgravity.com'}
       Pat Farrell
     with any questions
+%p
 .row
+  .col-1
   .col-8
-    %ul
-      %li
-        %a{href: "#{url_for '/v1/earthquakes'}"}
-          Recent Earthquakes
+    %a{href: "#{url_for '/v1/earthquakes'}"}
+      .item.highlight
+        %h4
+          HTML version of Recent Earthquakes API
+    %a{href: "#{url_for '/v1/earthquakes.json'}"}
+      .item.highlight
+        %h4
+          JSON version of Recent Earthquakes API
+    %a{href: "#{url_for '/v1/describe/earthquakes'}"}
+      .item.highlight
+        %h4
+          How to use this api 
+    %a{href: "#{url_for '/v1/describe/earthquakes'}"}
+      .item.highlight
+        %h4
+          JSON documentation
