@@ -14,11 +14,24 @@
     %style
       body { padding-top:60px; }
   %body
-    .navbar.navbar-inverse.navbar-fixed-top
-      .navbar-inner
-        .container
-          .navbar-brand
+    .navbar.navbar-fixed-top
+      .container
+        .navbar-brand
+          %a{href: "/"}
             Quakes!!
+        %ul.nav.navbar-nav
+          %li
+            %a{href: "/v1/earthquakes"}
+              HTML
+          %li
+            %a{href: "/v1/earthquakes.json"}
+              JSON
+          %li
+            %a{href: "/v1/describe/earthquakes"}
+              API usage
+
+
+            
     .container
       =yield
     .container#footer

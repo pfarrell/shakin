@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'byebug'
 
 describe 'Shakin, a Sinatra joint,' do
 
@@ -14,7 +13,19 @@ describe 'Shakin, a Sinatra joint,' do
     expect(last_response.header["content-type"]).to eq("text/html;charset=utf-8")
   end
 
-  it "should return json for /earthquakes.json" do
+  it "should return html to /v1/describe/earthquakes" do
+    get "/v1/earthquakes"
+    expect(last_response).to be_ok
+    expect(last_response.header["content-type"]).to eq("text/html;charset=utf-8")
+  end
+
+  it "should return json for /v1/earthquakes.json" do
+    get "/v1/earthquakes.json"
+    expect(last_response).to be_ok
+    expect(last_response.header["content-type"]).to eq("application/json;charset=utf-8")
+  end
+  
+  it "should return json for /v1/describe/earthquakes.json" do
     get "/v1/earthquakes.json"
     expect(last_response).to be_ok
     expect(last_response.header["content-type"]).to eq("application/json;charset=utf-8")

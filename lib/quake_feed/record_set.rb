@@ -16,7 +16,7 @@ class RecordSet
   end
 
   def to_json(options = {})
-    return {date: @date, errors: @errors, data: @data, properties: @properties, params: @params, prev: @prev, uri: @uri, next: @next}.to_json
+    return {date: @date, errors: @errors, data: @data}.to_json
   end
 
   def to_csv(options = {})

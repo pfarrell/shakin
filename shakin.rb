@@ -51,20 +51,20 @@ class Shakin < Sinatra::Base
     haml :index
   end
 
-  get "/describe/v1/earthquakes" do
-    description = Quake.describe
-    respond_to do |wants|
-      wants.json { RecordSet.new(data: description).to_json }
-      wants.html { haml :quakes, locals: {data: description, desc: "List of all recent earthquakes"}}
-    end
-  end
-
-
   get "/v1/earthquakes" do
     quakes = get_quakes(params)
     respond_to do |wants|
       wants.json { RecordSet.new(data: quakes).to_json }
       wants.html { haml :quakes, locals: {data: quakes, desc: "List of all recent earthquakes"}}
+    end
+  end
+
+  get "/v1/describe/earthquakes" do
+    class_description = Quake.describe
+    route_description = "Retrieves information about recent earthquakes"
+    respond_to do |wants|
+      wants.json { RecordSet.new(data: class_description).to_json }
+      wants.html { haml :route, locals: {object_info: class_description, description: route_description, route: "earthquakes"}}
     end
   end
 end
