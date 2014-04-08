@@ -50,9 +50,9 @@
         Name
       %th
         Type
-      -object_info[:props].each do |c|
+      -object_info[:properties].each do |prop|
         %tr
           %td
-            =c.name
+            =prop[:name]
           %td
-            =c.primitive.to_s
+            =prop[:primitive].to_s
