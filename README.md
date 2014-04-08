@@ -1,29 +1,19 @@
 # QuakeFeed
 
-TODO: Write a gem description
+This a simple project so I can share some of my current thoughts on building a JSON api.
+
+You can see this project [in action at heroku](http://shakin.herokuapp.com/)
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Depends on
 
-    gem 'quake_feed'
+* bundler
+* postgresql
+* ruby 2.x
 
-And then execute:
+1. clone the repo
+1. create a database called quakes in postgres
+1. bundle exec rackup config.ru
+1. goto http://localhost:9292
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install quake_feed
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it ( http://github.com/<my-github-username>/quake_feed/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
