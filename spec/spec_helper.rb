@@ -1,6 +1,5 @@
 require 'simplecov'
 require 'rack/test'
-require './shakin'
 
 module RSpecMixin
   include Rack::Test::Methods
@@ -9,6 +8,7 @@ end
 
 SimpleCov.start do
   add_filter "/vendor/"
+  add_filter "/spec/"
 end
 
 RSpec.configure do |config|
@@ -25,3 +25,4 @@ RSpec.configure do |config|
 end
 
 require 'quake_feed'
+require './shakin'
