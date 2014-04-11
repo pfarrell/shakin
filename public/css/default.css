@@ -99,3 +99,7 @@ table.sortable th:hover{
 div.header {
   margin-bottom:1em;
 }
+
+body {
+   padding-bottom: 70px;
+}
