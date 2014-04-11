@@ -10,6 +10,6 @@ class Parameter
   end
 
   def to_json(opts = {})
-    return {:name=>@name, :data_type=>@data_type, :description=>@description}
+    return {:name=>@name, :data_type=>@data_type, :description=>@description}.to_json
   end
 end
