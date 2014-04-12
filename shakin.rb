@@ -13,8 +13,9 @@ class Shakin < Sinatra::Base
   helpers Sinatra::UrlForHelper
 
   #DataMapper::Logger.new(STDOUT, :debug) 
+
   DataMapper.setup(:default, ENV["DATABASE_URL"] || 'postgres://localhost/quakes')
-  DataMapper.auto_upgrade!
+  #DataMapper.auto_upgrade!
   DataMapper.finalize
 
   def get_quakes(params)
