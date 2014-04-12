@@ -10,12 +10,7 @@ task :import, :debug do |t,args|
   DataMapper.setup(:default, ENV["DATABASE_URL"] || 'postgres://localhost/quakes')
   DataMapper.finalize
 
-  case ENV['RACK_ENV']
-    when 'test'
-      quake_data = 'spec/fixtures/eqs7day-M1.txt'
-    else
-      quake_data = 'http://earthquake.usgs.gov/earthquakes/catalogs/eqs7day-M1.txt' 
-  end
+  quake_data = ENV['RACK_ENV'] == 'test' ? 'spec/fixtures/eqs7day-M1.txt' : 'http://earthquake.usgs.gov/earthquakes/catalogs/eqs7day-M1.txt' 
   file = open(quake_data)
 
   c = CSV.open(file)
@@ -32,11 +27,7 @@ task :import, :debug do |t,args|
       quake.depth     = row[7]
       quake.nst       = row[8]
       quake.region    = row[9]
-      begin
-        quake.save
-      rescue Exception => ex
-        puts ex.inspect
-      end
+      quake.save
     end
   end
 

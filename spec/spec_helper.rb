@@ -4,6 +4,11 @@ require 'rack/test'
 require 'rake'
 require 'data_mapper'
 
+SimpleCov.start do
+  add_filter "/vendor/"
+  add_filter "/spec/"
+end
+
 ENV['RACK_ENV'] = 'test'
 ENV['DATABASE_URL'] = 'sqlite::memory:'
 
@@ -34,11 +39,6 @@ module SetupHelper
 
 end
 
-SimpleCov.start do
-  add_filter "/vendor/"
-  add_filter "/spec/"
-end
-
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
   config.run_all_when_everything_filtered = true
@@ -49,5 +49,5 @@ RSpec.configure do |config|
 end
 
 
-require 'quake_feed'
 require './shakin'
+require 'quake_feed'

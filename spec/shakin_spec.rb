@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'byebug'
 
 describe 'Shakin, a Sinatra joint,' do
 
@@ -30,8 +31,42 @@ describe 'Shakin, a Sinatra joint,' do
   end
   
   it "should return json for /v1/describe/earthquakes.json" do
-    get "/v1/earthquakes.json"
+    get "/v1/describe/earthquakes.json"
     expect(last_response).to be_ok
     expect(last_response.header["content-type"]).to eq("application/json;charset=utf-8")
+    doc = JSON.parse(last_response.body)
+    expect(doc).to be_a(Hash)
+  end
+
+  it "can filter on the day an earthquake occurred in seconds since epoch" do
+    get "/v1/earthquakes.json?on=1397240499"
+    expect(last_response).to be_ok
+    expect(last_response.header["content-type"]).to eq("application/json;charset=utf-8")
+    doc = JSON.parse(last_response.body)
+    expect(doc["data"].size).to eq(35)
+  end
+
+  it "can filter on earthquakes after a date in seconds since epoch" do
+    get "/v1/earthquakes.json?since=1397240499"
+    expect(last_response).to be_ok
+    expect(last_response.header["content-type"]).to eq("application/json;charset=utf-8")
+    doc = JSON.parse(last_response.body)
+    expect(doc["data"].size).to eq(12)
+  end
+  
+  it "can filter on earthquakes over a specific magnitude" do
+    get "/v1/earthquakes.json?over=4.0"
+    expect(last_response).to be_ok
+    expect(last_response.header["content-type"]).to eq("application/json;charset=utf-8")
+    doc = JSON.parse(last_response.body)
+    expect(doc["data"].size).to eq(3)
+  end
+
+  it "can filter on earthquakes within 5 miles of a specific latitude,longitude" do
+    get "/v1/earthquakes.json?near=38.8205,-122.7658"
+    expect(last_response).to be_ok
+    expect(last_response.header["content-type"]).to eq("application/json;charset=utf-8")
+    doc = JSON.parse(last_response.body)
+    expect(doc["data"].size).to eq(22)
   end
 end
