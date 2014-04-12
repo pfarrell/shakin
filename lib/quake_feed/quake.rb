@@ -5,14 +5,14 @@ class Quake
 
   property :id,  Serial
   property :src, String
-  property :eqid, Integer
+  property :eqid, String
   property :version, Integer
   property :datetime, DateTime
   property :latitude, Float
   property :longitude, Float
   property :magnitude, Float
   property :depth, Float
-  property :nst, Integer
+  property :nst, String
   property :region, String
 
   property :created_at, DateTime

@@ -5,12 +5,19 @@ require 'csv'
 require 'quake_feed'
 
 task :import, :debug do |t,args|
+  puts "args: #{args.inspect}"
   DataMapper::Logger.new(STDOUT, :debug) if args.debug == "debug"
+  DataMapper::Model.raise_on_save_failure = true
   DataMapper.setup(:default, ENV["DATABASE_URL"] || 'postgres://localhost/quakes')
-  DataMapper.auto_upgrade!
   DataMapper.finalize
 
-  file = open('http://earthquake.usgs.gov/earthquakes/catalogs/eqs7day-M1.txt')
+  case ENV['RACK_ENV']
+    when 'test'
+      quake_data = 'spec/fixtures/eqs7day-M1.txt'
+    else
+      quake_data = 'http://earthquake.usgs.gov/earthquakes/catalogs/eqs7day-M1.txt' 
+  end
+  file = open(quake_data)
 
   c = CSV.open(file)
   c.drop(2).each do |row|
@@ -26,7 +33,11 @@ task :import, :debug do |t,args|
       quake.depth     = row[7]
       quake.nst       = row[8]
       quake.region    = row[9]
-      quake.save
+      begin
+        quake.save
+      rescue Exception => ex
+        puts ex.inspect
+      end
     end
   end
 
