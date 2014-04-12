@@ -5,7 +5,6 @@ require 'csv'
 require 'quake_feed'
 
 task :import, :debug do |t,args|
-  puts "args: #{args.inspect}"
   DataMapper::Logger.new(STDOUT, :debug) if args.debug == "debug"
   DataMapper::Model.raise_on_save_failure = true
   DataMapper.setup(:default, ENV["DATABASE_URL"] || 'postgres://localhost/quakes')
