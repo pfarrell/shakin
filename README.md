@@ -15,5 +15,5 @@ Depends on
 1. clone the repo
 1. create a database called quakes in postgres
 1. bundle exec rackup config.ru
-1. goto http://localhost:9292
+1. goto [http://localhost:9292](http://localhost:9292)
 
